@@ -5,12 +5,11 @@ on:
     branches:
       - main
     paths:
-      - "src/**"
-      - "content/**"
-      - ".github/workflows/build-deploy.yml"
+      - 'src/**'
+      - 'content/**'
+      - '.github/workflows/build-deploy.yml'
 
 permissions:
-  contents: write
   pages: write
   id-token: write
 
@@ -19,24 +18,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out repo (full history, so we can commit back)
+      # 1. Check out the entire repo (so 'make clean' works)
       - name: Checkout main
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Install system dependencies
+      # 2. Install Pandoc, make, jq
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc make jq
 
-      # 3. Build via 'make'
-      - name: Build site (pandoc → index.html)
+      # 3. Force‐clean then rebuild index.html
+      - name: Clean & build site
         run: |
+          echo "→ Cleaning old output"
+          make clean
+          echo "→ Running make (force rebuild)"
           make
+          echo "→ Files after build:"
+          ls -1 .
 
-      # 4. Prepare 'build' folder with everything to publish
+      # 4. Prepare a 'build' folder with the exact files to publish
       - name: Prepare artifact folder
         run: |
           rm -rf build
@@ -45,28 +49,12 @@ jobs:
           cp -R src build/
           rsync -av --exclude='*.md' --exclude='*.html' content/ build/
 
-      # 5. Upload the 'build' folder as the Pages artifact
+      # 5. Upload *only* the contents of 'build/' as the Pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: build/*
 
       # 6. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-
-      # 7. Copy generated index.html back to repo root (to commit)
-      - name: Copy generated index.html to root
-        run: |
-          cp build/index.html index.html
-
-      # 8. Create a PR with the updated index.html
-      - name: Create Pull Request for built files
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "ci: update generated site"
-          branch: "auto/update-site-${{ github.run_number }}"
-          title: "chore: update generated site"
-          body: "Auto-generated update of index.html"
-          paths: index.html
