@@ -40,7 +40,7 @@ Lovely. We can hide stuff in the `<details`> element:
 
 <details>
 <summary>A short summary of the contents</summary>
-<p>Hidden gems.</p>
+<p>Hidden gems!</p>
 </details>
 
 ## Lists
