@@ -1,4 +1,4 @@
-# .github/workflows/deploy.yml
+# .github/workflows/build-deploy.yml
 name: Build & Deploy to GitHub Pages
 on:
   push:
