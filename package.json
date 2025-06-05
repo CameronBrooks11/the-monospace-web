@@ -1,5 +1,5 @@
 {
-  "name": "@owickstrom/the-monospace-web",
+  "name": "@CameronBrooks11/the-monospace-web",
   "version": "0.1.5",
   "description": " A minimalist design exploration",
   "main": "src/index.css",
@@ -8,17 +8,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/owickstrom/the-monospace-web.git"
+    "url": "git+ssh://git@github.com/CameronBrooks11/the-monospace-web.git"
   },
   "keywords": [
     "css"
   ],
-  "author": "Oskar Wickström",
+  "author": "Cameron K. Brooks",
+  "contributors": [
+    "Oskar Wickström <github.com/owickstrom>",
+    "Andreas <github.com/azettl>",
+    "Ben Hampson <github.com/ben-hampson>",
+    "Jeremiah Lee <github.com/jeremiahlee>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/owickstrom/the-monospace-web/issues"
+    "url": "https://github.com/CameronBrooks11/the-monospace-web/issues"
   },
-  "homepage": "https://github.com/owickstrom/the-monospace-web#readme",
+  "homepage": "https://github.com/CameronBrooks11/the-monospace-web#readme",
 
   "files": [
     "src/index.css",

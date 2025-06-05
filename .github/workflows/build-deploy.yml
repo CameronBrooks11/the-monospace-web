@@ -1,0 +1,42 @@
+# .github/workflows/deploy.yml
+name: Build & Deploy to GitHub Pages
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Check out the repo
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      # 2. Install Nix with flakes enabled
+      - name: Set up Nix (with flakes)
+        uses: nix-community/setup-nix@v2
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      # 3. Build via 'make' inside the flake dev shell
+      - name: Build site (pandoc → index.html)
+        run: |
+          # Enter Nix devShell defined by flake.nix, then run make
+          nix develop --command make
+
+      # 4. Collect the generated index.html (and any other built files)
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: |
+            index.html
+
+      # 5. Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1

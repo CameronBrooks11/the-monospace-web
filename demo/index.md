@@ -9,7 +9,7 @@ toc-title: Contents
 
 ## Introduction
 
-Monospace fonts are dear to many of us. 
+Monospace fonts are dear to many of us.
 Some find them more readable, consistent, and beautiful, than their proportional alternatives.
 Maybe we're just brainwashed from spending years in terminals?
 Or are we hopelessly nostalgic?
@@ -47,17 +47,17 @@ Lovely. We can hide stuff in the `<details`> element:
 
 This is a plain old bulleted list:
 
-* Banana
-* Paper boat
-* Cucumber
-* Rocket
+- Banana
+- Paper boat
+- Cucumber
+- Rocket
 
 Ordered lists look pretty much as you'd expect:
 
 1. Goals
 1. Motivations
-    1. Intrinsic
-    1. Extrinsic
+   1. Intrinsic
+   1. Extrinsic
 1. Second-order effects
 
 It's nice to visualize trees.
@@ -65,31 +65,31 @@ This is a regular unordered list with a `tree` class:
 
 <ul class="tree"><li><p style="margin: 0;"><strong>/dev/nvme0n1p2</strong></p>
 
-* usr                               
-    * local                         
-    * share                         
-    * libexec                       
-    * include                       
-    * sbin                          
-    * src                           
-    * lib64                         
-    * lib                           
-    * bin                           
-    * games                         
-        * solitaire
-        * snake
-        * tic-tac-toe
-    * media                         
-* media                             
-* run                               
-* tmp                               
+- usr
+  - local
+  - share
+  - libexec
+  - include
+  - sbin
+  - src
+  - lib64
+  - lib
+  - bin
+  - games
+    - solitaire
+    - snake
+    - tic-tac-toe
+  - media
+- media
+- run
+- tmp
 
 </li></ul>
 
 ## Tables
 
 We can use regular tables that automatically adjust to the monospace grid.
-They're responsive. 
+They're responsive.
 
 <table>
 <thead>
