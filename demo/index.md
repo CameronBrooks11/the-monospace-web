@@ -1,8 +1,8 @@
 ---
 title: The Monospace Web
-subtitle: A minimalist design exploration
-author: Oskar Wickström
-author-url: "https://wickstrom.tech"
+subtitle: A further minimalist design exploration
+author: Cameron K. Brooks
+author-url: "https://cameronbrooks.net"
 lang: en
 toc-title: Contents
 ---
