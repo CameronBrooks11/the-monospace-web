@@ -59,7 +59,7 @@ jobs:
 
       # 7. Commit and open a PR with updated build/ folder
       - name: Create Pull Request for build/ updates
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "ci: update build folder"
