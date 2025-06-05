@@ -19,11 +19,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out the entire repo (so 'make clean' works)
+      # 1. Check out the entire repo (so 'make clean' works and we can push back)
       - name: Checkout main
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: true
 
       # 2. Install Pandoc, make, jq
       - name: Install dependencies
@@ -34,11 +35,8 @@ jobs:
       # 3. Force-clean then run make (output lands in build/index.html)
       - name: Clean & build site
         run: |
-          echo "→ Cleaning old output"
           make clean
-          echo "→ Running make (build to build/index.html)"
           make
-          echo "→ Contents of build/:"
           ls -R build
 
       # 4. Copy CSS/JS and media into build/
@@ -47,17 +45,7 @@ jobs:
           cp -R src build/
           rsync -av --exclude='*.md' --exclude='*.html' content/ build/
 
-      # 5. Upload all files under build/ as the Pages artifact
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build
-
-      # 6. Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-
-      # 7. Commit and open a PR with updated build/ folder
+      # 5. Create a PR containing any changes under build/
       - name: Create Pull Request for build/ updates
         uses: peter-evans/create-pull-request@v7
         with:
@@ -67,3 +55,13 @@ jobs:
           title: "chore: update build folder"
           body: "Auto-generated update of the build/ directory"
           path: build
+
+      # 6. Upload all files under build/ as the Pages artifact
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+      # 7. Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
