@@ -5,9 +5,9 @@ on:
     branches:
       - main
     paths:
-      - 'src/**'
-      - 'content/**'
-      - '.github/workflows/build-deploy.yml'
+      - "src/**"
+      - "content/**"
+      - ".github/workflows/build-deploy.yml"
 
 permissions:
   pages: write
@@ -30,30 +30,27 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc make jq
 
-      # 3. Force‐clean then rebuild index.html
+      # 3. Force-clean then run make (output now lands in build/index.html)
       - name: Clean & build site
         run: |
           echo "→ Cleaning old output"
           make clean
-          echo "→ Running make (force rebuild)"
+          echo "→ Running make (build to build/index.html)"
           make
-          echo "→ Files after build:"
-          ls -1 .
+          echo "→ Contents of build/:"
+          ls -R build
 
-      # 4. Prepare a 'build' folder with the exact files to publish
-      - name: Prepare artifact folder
+      # 4. Copy CSS/JS and media into build/
+      - name: Copy assets into build
         run: |
-          rm -rf build
-          mkdir -p build
-          cp index.html build/
           cp -R src build/
           rsync -av --exclude='*.md' --exclude='*.html' content/ build/
 
-      # 5. Upload *only* the contents of 'build/' as the Pages artifact
+      # 5. Upload all files under build/ as the Pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/*
+          path: build/**
 
       # 6. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages

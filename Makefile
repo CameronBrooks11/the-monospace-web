@@ -1,12 +1,23 @@
-VERSION=$(shell jq -r .version package.json)
-DATE=$(shell date +%F)
+VERSION := $(shell jq -r .version package.json)
+DATE    := $(shell date +%F)
 
-all: index.html
+BUILD_DIR := build
+
+all: $(BUILD_DIR)/index.html
 
 clean:
-	rm -f index.html
+	rm -rf $(BUILD_DIR)
 
-index.html: content/index.md content/template.html Makefile
-	pandoc --toc -s --css src/reset.css --css src/index.css -Vversion=v$(VERSION) -Vdate=$(DATE) -i $< -o $@ --template=content/template.html
+$(BUILD_DIR)/index.html: content/index.md content/template.html Makefile
+	mkdir -p $(BUILD_DIR)
+	pandoc \
+	  --toc -s \
+	  --css src/reset.css \
+	  --css src/index.css \
+	  -Vversion=v$(VERSION) \
+	  -Vdate=$(DATE) \
+	  -i $< \
+	  -o $@ \
+	  --template=content/template.html
 
 .PHONY: all clean
