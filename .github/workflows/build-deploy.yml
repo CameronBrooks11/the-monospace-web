@@ -13,29 +13,25 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1. Check out the repo
+      # Check out the repo
       - name: Checkout main
         uses: actions/checkout@v4
-
-      # 2. Install system dependencies (pandoc, make, jq)
+      # Install system dependencies (pandoc, make, jq)
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc make jq
-
-      # 3. Build via 'make'
+      # Build via 'make'
       - name: Build site (pandoc → index.html)
         run: |
           echo "→ Running make…"
           make
-
-      # 4. Upload the generated index.html
+      # Upload the generated index.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: |
             index.html
-
-      # 5. Deploy to GitHub Pages
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
