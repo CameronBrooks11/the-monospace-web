@@ -32,11 +32,14 @@ jobs:
           echo "→ Listing files after make:"
           ls -1 .
 
-      # 4. Copy index.html into a folder for artifact upload
+      # 4. Prepare a 'build' folder with all published files
       - name: Prepare artifact folder
         run: |
+          rm -rf build
           mkdir -p build
           cp index.html build/
+          cp -R src build/
+          cp demo/castle.jpg build/   # copy any demo media you reference
 
       # 5. Upload the 'build' folder as the Pages artifact
       - name: Upload Pages artifact
