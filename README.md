@@ -34,8 +34,8 @@ Inside this shell you have all dependencies (pandoc, jq, make, live-server) avai
 make
 ```
 
-- Pandoc reads demo/index.md (Markdown + frontmatter)
-- Injects CSS (src/reset.css, src/index.css) and the demo/template.html layout
+- Pandoc reads content/index.md (Markdown + frontmatter)
+- Injects CSS (src/reset.css, src/index.css) and the content/template.html layout
 - Outputs a single index.html at the repository root
 
 ### 3. Preview Locally

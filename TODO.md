@@ -4,7 +4,7 @@
    - Add a GitHub Actions workflow to run `make` on push, deploy `index.html` to GitHub Pages, and cache the Nix store.
 
 2. **Improve Metadata & SEO**  
-   - Add `<meta name="description">`, `<meta property="og:…">`, and `<link rel="icon">` in `demo/template.html`.  
+   - Add `<meta name="description">`, `<meta property="og:…">`, and `<link rel="icon">` in `content/template.html`.  
    - Ensure each page (when multi‐page) has a unique title/description.
 
 3. **Accessibility & I18n**  
@@ -34,7 +34,7 @@
 9. **Content & Theming**  
    - Experiment with alternate monospace fonts or font‐pairing (e.g., serif headers + monospace body).  
    - Provide dark‐only or light‐only CSS overrides (beyond `prefers-color-scheme`).  
-   - Create additional demo pages (e.g., blog posts, portfolio) to showcase the grid.
+   - Create additional content pages (e.g., blog posts, portfolio) to showcase the grid.
 
 10. **Performance & Optimization**  
     - Minify CSS and inline critical CSS for faster rendering.  

@@ -4,8 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "src/**"
+      - "content/**"
+      - ".github/workflows/build-deploy.yml"
 
 permissions:
+  contents: write
   pages: write
   id-token: write
 
@@ -14,9 +19,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out the repo
+      # 1. Check out repo (full history, so we can commit back)
       - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # 2. Install system dependencies
       - name: Install dependencies
@@ -27,19 +34,16 @@ jobs:
       # 3. Build via 'make'
       - name: Build site (pandoc → index.html)
         run: |
-          echo "→ Running make…"
           make
-          echo "→ Listing files after make:"
-          ls -1 .
 
-      # 4. Prepare a 'build' folder with all published files
+      # 4. Prepare 'build' folder with everything to publish
       - name: Prepare artifact folder
         run: |
           rm -rf build
           mkdir -p build
           cp index.html build/
           cp -R src build/
-          cp demo/castle.jpg build/   # copy any demo media you reference
+          rsync -av --exclude='*.md' --exclude='*.html' content/ build/
 
       # 5. Upload the 'build' folder as the Pages artifact
       - name: Upload Pages artifact
@@ -50,3 +54,19 @@ jobs:
       # 6. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+
+      # 7. Copy generated index.html back to repo root (to commit)
+      - name: Copy generated index.html to root
+        run: |
+          cp build/index.html index.html
+
+      # 8. Create a PR with the updated index.html
+      - name: Create Pull Request for built files
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "ci: update generated site"
+          branch: "auto/update-site-${{ github.run_number }}"
+          title: "chore: update generated site"
+          body: "Auto-generated update of index.html"
+          paths: index.html
