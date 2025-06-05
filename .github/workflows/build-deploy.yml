@@ -66,4 +66,4 @@ jobs:
           branch: "auto/update-build-${{ github.run_number }}"
           title: "chore: update build folder"
           body: "Auto-generated update of the build/ directory"
-          path: build/**
+          path: build
