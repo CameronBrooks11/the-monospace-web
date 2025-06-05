@@ -32,12 +32,18 @@ jobs:
           echo "→ Listing files after make:"
           ls -1 .
 
-      # 4. Upload the generated index.html
+      # 4. Copy index.html into a folder for artifact upload
+      - name: Prepare artifact folder
+        run: |
+          mkdir -p build
+          cp index.html build/
+
+      # 5. Upload the 'build' folder as the Pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: index.html
+          path: build
 
-      # 5. Deploy to GitHub Pages
+      # 6. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
