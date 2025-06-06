@@ -186,7 +186,7 @@ To have it stand out a bit more, we can wrap it in a `<figure>` tag, and why not
 <figcaption>Example: Message passing.</figcaption>
 </figure>
 
-Let's go wild and draw a nice little chart!
+Let's go wild and draw a chart!
 
 <figure><pre>
                       Things I Have
