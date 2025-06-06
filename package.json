@@ -1,17 +1,20 @@
 {
-  "name": "@CameronBrooks11/the-monospace-web",
-  "version": "0.1.5",
-  "description": " A minimalist design exploration",
-  "main": "src/index.css",
+  "name": "@cameronbrooks11/the-monospace-web",
+  "version": "0.2.0",
+  "description": "An extended minimalist design exploration (uses the monospace-web-theme package)",
   "scripts": {
+    "build": "make",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/CameronBrooks11/the-monospace-web.git"
+    "url": "git+https://github.com/CameronBrooks11/the-monospace-web.git"
   },
   "keywords": [
-    "css"
+    "css",
+    "static-site",
+    "pandoc",
+    "monospace"
   ],
   "author": "Cameron K. Brooks",
   "contributors": [
@@ -25,12 +28,15 @@
     "url": "https://github.com/CameronBrooks11/the-monospace-web/issues"
   },
   "homepage": "https://github.com/CameronBrooks11/the-monospace-web#readme",
-
+  "dependencies": {
+    "monospace-web-theme": "^1.0.0"
+  },
   "files": [
-    "src/index.css",
-    "src/reset.css",
-    "src/index.js",
+    "build/",
+    "content/",
+    "Makefile",
+    "README.md",
     "LICENSE",
-    "README.md"
+    "TODO.md"
   ]
 }

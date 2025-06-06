@@ -71,6 +71,8 @@ $for(include-after)$
 $include-after$
 $endfor$
   <div class="debug-grid"></div>
-  <script src="src/index.js"></script>
+  $if(js)$
+  <script src="$js$"></script>
+  $endif$
 </body>
 </html>
