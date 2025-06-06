@@ -3,8 +3,7 @@
 Monospace fonts have a unique appeal—whether it’s terminal nostalgia or simply the clarity of fixed-width text.  
 **The Monospace Web** is a minimal, Markdown-driven static site that lays everything out on a character-aligned grid using pure CSS and a tiny JavaScript helper. It’s a “70s-style” look for modern browsers, with full responsiveness and semantic HTML.
 
-Live demo:  
-<https://CameronBrooks11.github.io/the-monospace-web/>
+> _Live demo: [CameronBrooks11.github.io/the-monospace-web](https://CameronBrooks11.github.io/the-monospace-web/)_
 
 ---
 
@@ -34,8 +33,91 @@ Inside this shell you have all dependencies (pandoc, jq, make, live-server) avai
 make
 ```
 
-- Pandoc reads content/index.md (Markdown + frontmatter)
-- Injects CSS (src/reset.css, src/index.css) and the content/template.html layout
-- Outputs a single index.html at the repository root
+- Runs Pandoc on content/index.md with CSS from src/ and template content/template.html.
+- Writes build/index.html, plus copies CSS/JS into build/src/ and media into build/.
 
 ### 3. Preview Locally
+
+```bash
+live-server build
+```
+
+- Opens build/index.html in your default browser and reloads on changes.
+
+### 4. Deploy to GitHub Pages
+
+The included workflow (.github/workflows/build-deploy.yml) triggers on pushes to main under src/, content/, or the workflow file itself. It:
+
+1. Checks out the repo.
+
+2. Installs Pandoc, make, jq.
+
+3. Runs make clean && make.
+
+4. Commits any changes in build/ back to main via an auto PR.
+
+5. Uploads build/ to GitHub Pages.
+
+Once you push to main, GitHub Actions will rebuild and publish the updated build/ contents to Pages. You can then visit:
+
+`https://{your-username}.github.io/the-monospace-web/`
+
+## Repository Layout
+
+```pgsql
+.
+├── LICENSE
+├── Makefile
+├── README.md
+├── TODO.md
+├── flake.nix
+├── .envrc
+├── package.json
+├── .github/
+│   └── workflows/
+│       └── build-deploy.yml   ← GitHub Actions workflow
+├── build/
+│   ├── castle.jpg             ← media copied from content/
+│   ├── index.html             ← generated site
+│   └── src/
+│       ├── index.css
+│       ├── index.js
+│       └── reset.css
+├── content/
+│   ├── index.md               ← source Markdown (frontmatter + content)
+│   ├── template.html          ← Pandoc HTML template (header, TOC, scripts)
+│   └── castle.jpg             ← example media
+└── src/
+    ├── reset.css              ← reset styling rules
+    ├── index.css              ← custom monospace grid rules
+    └── index.js               ← JS for media padding & debug toggle
+```
+
+- **`Makefile`**
+  - `make`: builds build/index.html from content/index.md using content/template.html and CSS/JS in src/.
+  - `make clean`: removes build/.
+- **`content/`**
+  - `index.md`: your Markdown content (headings, lists, tables, ASCII art, media embeds).
+  - `template.html`: Pandoc template—defines header table (title/subtitle/version/date), debug toggle, and script inclusion.
+- **`src/`**
+  - reset.css: Eric Meyer reset + monospace grid base.
+  - index.css: variables and typography for the character grid.
+  - index.js: measures character cell size, pads media to align, and toggles debug overlay.
+- **`build/`** (automatically generated)
+  - index.html, CSS/JS under build/src/, and any media under build/.
+
+## Versioning
+
+- Version is read from package.json (e.g. 0.1.5).
+
+- On each make, `$(VERSION)` and `$(DATE)` appear in the header table via Pandoc’s `-V version=v$(VERSION)` and `-V date=$(DATE)`.
+
+## License
+
+This project is released under the [MIT License](./LICENSE).
+
+## Acknowledgements
+
+- A further development of: [owickstrom/the-monospace-web](https://github.com/owickstrom/the-monospace-web).
+
+- Uses [JetBrains Mono Font Family](https://github.com/JetBrains/JetBrainsMono).
