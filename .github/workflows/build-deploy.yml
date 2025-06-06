@@ -8,6 +8,7 @@ on:
       - "content/**"
       - ".github/workflows/build-deploy.yml"
       - "Makefile"
+      - "package.json"
 
 permissions:
   contents: write

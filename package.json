@@ -1,6 +1,6 @@
 {
   "name": "@cameronbrooks11/the-monospace-web",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An extended minimalist design exploration (uses the monospace-web-theme package)",
   "scripts": {
     "build": "make",
