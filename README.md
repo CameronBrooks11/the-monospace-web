@@ -78,33 +78,22 @@ Once you push to main, GitHub Actions will rebuild and publish the updated build
 │       └── build-deploy.yml   ← GitHub Actions workflow
 ├── build/
 │   ├── castle.jpg             ← media copied from content/
-│   ├── index.html             ← generated site
-│   └── src/
-│       ├── index.css
-│       ├── index.js
-│       └── reset.css
-├── content/
-│   ├── index.md               ← source Markdown (frontmatter + content)
-│   ├── template.html          ← Pandoc HTML template (header, TOC, scripts)
-│   └── castle.jpg             ← example media
-└── src/
-    ├── reset.css              ← reset styling rules
-    ├── index.css              ← custom monospace grid rules
-    └── index.js               ← JS for media padding & debug toggle
+│   └── index.html             ← generated site
+└── content/
+    ├── index.md               ← source Markdown (frontmatter + content)
+    ├── template.html          ← Pandoc HTML template (header, TOC, scripts)
+    └── castle.jpg             ← example media
 ```
 
 - **`Makefile`**
-  - `make`: builds build/index.html from content/index.md using content/template.html and CSS/JS in src/.
+  - `make`: builds build/index.html from content/index.md using content/template.html and CSS/JS in [monospace-web-theme](https://github.com/CameronBrooks11/monospace-web-theme).
   - `make clean`: removes build/.
 - **`content/`**
   - `index.md`: your Markdown content (headings, lists, tables, ASCII art, media embeds).
   - `template.html`: Pandoc template—defines header table (title/subtitle/version/date), debug toggle, and script inclusion.
-- **`src/`**
-  - reset.css: Eric Meyer reset + monospace grid base.
-  - index.css: variables and typography for the character grid.
-  - index.js: measures character cell size, pads media to align, and toggles debug overlay.
 - **`build/`** (automatically generated)
-  - index.html, CSS/JS under build/src/, and any media under build/.
+  - `index.html`,
+  - and any media under build/.
 
 ## Versioning
 
