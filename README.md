@@ -1,7 +1,7 @@
 # The Monospace Web
 
 Monospace fonts have a unique appeal—whether it’s terminal nostalgia or simply the clarity of fixed-width text.  
-**The Monospace Web** is a minimal, Markdown-driven static site that lays everything out on a character-aligned grid using pure CSS and a tiny JavaScript helper. It’s a “70s-style” look for modern browsers, with full responsiveness and semantic HTML.
+**The Monospace Web** is a minimal, Markdown-driven static site that renders everything on a character-aligned grid using the [monospace-web-theme](https://github.com/CameronBrooks11/monospace-web-theme) CSS/JS package. It’s a “70s-style” look for modern browsers, with full responsiveness and semantic HTML.
 
 > _Live demo: [CameronBrooks11.github.io/the-monospace-web](https://CameronBrooks11.github.io/the-monospace-web/)_
 
@@ -11,8 +11,11 @@ Monospace fonts have a unique appeal—whether it’s terminal nostalgia or simp
 
 ### Prerequisites
 
+_Only required for local development._
+
 - [Nix (≥ 2.0)] or use [direnv](https://direnv.net/) to manage the environment.
 - Git, Pandoc, jq, GNU make (all provided by the Nix shell below).
+- [`live-server`](https://www.npmjs.com/package/live-server) for local preview.
 
 ### 1. Enter the Development Shell
 
