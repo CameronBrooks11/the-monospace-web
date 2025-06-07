@@ -12,8 +12,8 @@ $(BUILD_DIR)/index.html: content/index.md content/template.html Makefile
 	mkdir -p $(BUILD_DIR)
 	pandoc \
 	  --toc -s \
-	  --css https://cdn.jsdelivr.net/npm/monospace-web-theme@1.0.1/dist/monospace.css \
-	  -V js="https://cdn.jsdelivr.net/npm/monospace-web-theme@1.0.1/dist/monospace.js" \
+	  --css https://cdn.jsdelivr.net/npm/monospace-web-theme@1.0.1/dist/monospace.min.css \
+	  -V js="https://cdn.jsdelivr.net/npm/monospace-web-theme@1.0.1/dist/monospace.min.js" \
 	  -V version=v$(VERSION) \
 	  -V date=$(DATE) \
 	  -i $< \

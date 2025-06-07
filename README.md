@@ -121,3 +121,5 @@ This project is released under the [MIT License](./LICENSE).
 - A further development of: [owickstrom/the-monospace-web](https://github.com/owickstrom/the-monospace-web).
 
 - Uses [JetBrains Mono Font Family](https://github.com/JetBrains/JetBrainsMono).
+
+- Inspiration from [U.S. Graphics Company](https://x.com/usgraphics).

@@ -1,6 +1,6 @@
 ---
 title: The Monospace Web
-subtitle: A minimalist design exploration
+subtitle: An extended minimalist design exploration
 author: Cameron K. Brooks
 author-url: "https://cameronbrooks.net"
 lang: en
