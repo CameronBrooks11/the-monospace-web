@@ -23,7 +23,7 @@ jobs:
     steps:
       # 1. Check out the entire repo (so 'make clean' works and we can push back)
       - name: Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           persist-credentials: true
@@ -48,7 +48,7 @@ jobs:
 
       # 5. Create a PR containing any changes under build/
       - name: Create Pull Request for build/ updates
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "ci: update build folder"
@@ -58,10 +58,10 @@ jobs:
 
       # 6. Upload all files under build/ as the Pages artifact
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: build
 
       # 7. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
